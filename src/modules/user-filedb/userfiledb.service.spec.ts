@@ -18,8 +18,12 @@ describe('=== FiledbService Testing ===', () => {
   };
 
   const FILEDB_PATH: string = './test/user-filedb-test-data/';
-  // The dynamic file is used in the test dynamically (created, deleted , updated ...)
+
+  //   The dynamic file is created automatically by the unit test
+  // it is used by it to create, delete , updated ...). This file is not
+  // synced to git because it gets updated every test which causes git to need a commit.
   const FILEDB_FILENAME_DYNAMIC: string = 'user.filedb.dynamic.test.json';
+
   //The static file is used in the tests as a pre-determined constant value file
   // This is used to test filter, read.
   //! DO NOT CREATE/DELETE this file or it's objects - that will break the tests using it.

@@ -26,6 +26,9 @@ lerna-debug.log*
 # Tests
 /coverage
 /.nyc_output
+# Tests : The following ""...dynamic.test..." file is auto-created during 
+#         unit-test, so dont need to use in repo.
+user.filedb.dynamic.test.json
 
 # IDEs and editors
 /.idea
