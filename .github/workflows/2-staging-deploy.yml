@@ -1,14 +1,15 @@
 # File name : 2-deploy-staging.yml
-# It is the workflow for deploying code to the Staging Server when a push to develop is approved.
+# It is the workflow for deploying code to the 
+#  CloudRun StagingServer when a push to 'stage' is approved.
 
 name: Deploy to Staging Server
 on:
   push:
-    branches: [develop]
+    branches: [stage]
 
 env:
   PROJECT_ID: deploy-1-354514
-  SERVICE: gcrun-pipe
+  SERVICE: gznest-stage
   REGION: europe-west2
 
 jobs:
@@ -27,7 +28,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # ============= Authentication GitHub Actions with workload Identity Provider to access GCP ==========
+      # ===== Authentication GitHub Actions with workload Identity Provider to access GCP =====
       - name: Google Auth
         # _________________ T U R N    O F F    _____________________________
         #if: failure() # T U R N    O F F    _____________________________
