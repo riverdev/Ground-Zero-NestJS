@@ -1,0 +1,94 @@
+# File name : 2-deploy-staging.yml
+# It is the workflow for deploying code to the Staging Server when a push to develop is approved.
+
+name: Deploy to Staging Server
+on:
+  push:
+    branches: [develop]
+
+env:
+  PROJECT_ID: deploy-1-354514
+  SERVICE: gcrun-pipe
+  REGION: europe-west2
+
+jobs:
+  job1:
+    name: Deploy to Staging
+
+    # Add 'id-token' with the intended permissions for workload identity federation
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+      issues: 'write'
+
+    runs-on: ubuntu-latest
+    steps:
+      # ============= Checkout the repo so that this workflow can access it==========
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # ============= Authentication GitHub Actions with workload Identity Provider to access GCP ==========
+      - name: Google Auth
+        # _________________ T U R N    O F F    _____________________________
+        #if: failure() # T U R N    O F F    _____________________________
+        # _________________ T U R N    O F F    _____________________________
+        id: auth
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider:
+            '${{ secrets.WIF_PROVIDER }}'
+            # e.g. - projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+          service_account:
+            '${{ secrets.WIF_SERVICE_ACCOUNT }}'
+            # e.g. - my-service-account@my-project.iam.gserviceaccount.com
+
+      # ============= Deploy the code via CloudBuild to CloudRun ==========
+      - name: Deploy to Cloud Run
+        # _________________ T U R N    O F F    _____________________________
+        #if: failure() # T U R N    O F F    _____________________________
+        # _________________ T U R N    O F F    _____________________________
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0
+        with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          # NOTE: If required, update to the appropriate source folder
+          source: ./
+
+      # ============= Display the URL of the deployed server for acces to it ==========
+      # If required, use the Cloud Run url output in later steps
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}
+
+      # ============= In case anything above faled create an Issu  ==========
+      - name: If failed then create deploy issue
+        if: failure()
+        uses: actions-ecosystem/action-create-issue@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          title: Failed-deploy-staging-0940 # ${{ steps.getdate.outputs.today }} Failed wokflow deploying to staging server
+          body: |
+            ## Failed to deployed to Staging Server
+
+            - [ ] Find the errors
+            - [ ] Fix them
+          labels: |
+            deploy
+            staging
+
+      # ============= Get the value of todays date date
+      - name: Get today's date
+        id: getdate
+        run: |
+          echo "::set-output name=today::$(date "+%Y/%m/%d")"
+        # ${{ steps.getdate.outputs.today }}
+
+      # ============= Send a Slack message notify that successfuly done deployment ==========
+      - name: Send a Slack Message
+        uses: docker://technosophos/slack-notify
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} # The WEBHOOK is already config to channel z_general
+          #SLACK_MESSAGE: 'Deployed to Production'
+          #SLACK_MESSAGE: 'New Release ${{ github.event.release.tag_name }} is published, < ${{ github.event.release.html_url }}|check it out now.>'
+          SLACK_MESSAGE: Successfully deployed to Staging server on ${{ steps.getdate.outputs.today }}
+          #SLACK_CHANNEL: "z_general"

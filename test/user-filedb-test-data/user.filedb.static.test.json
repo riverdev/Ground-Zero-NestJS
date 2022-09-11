@@ -1,0 +1,37 @@
+[
+  {
+    "id": "5xz6jjDXGn7Q7kJuR-gWq",
+    "loginName": "NoName",
+    "passwordHash": "Aa*",
+    "emailAddress": "new@fdfd.com"
+  },
+  {
+    "id": "50DNdvoMOHhHeuY6NL3S0",
+    "loginName": "NoName",
+    "passwordHash": "Aa123*",
+    "emailAddress": "info@fdfd.com"
+  },
+  {
+    "id": "QVrRxUgnG66MdnUA1wk7Q",
+    "loginName": "Jane",
+    "passwordHash": "C55a*",
+    "emailAddress": "jane@fdfd.com"
+  },
+  {
+    "id": "U-CAN-ONLY-UPDATE-MY-OBJECT",
+    "loginName": "Default-Update-UserName",
+    "emailAddress": "update1-test@lala.com"
+  },
+  {
+    "loginName": "NoName",
+    "passwordHash": "Aa123*",
+    "emailAddress": "info@fdfd.com",
+    "id": "VC3coDvXYNY8c3Tc4fZIY"
+  },
+  {
+    "loginName": "Jerry",
+    "passwordHash": "Aa123*",
+    "emailAddress": "info@fdfd.com",
+    "id": "zl52G8dAnLeLIuqmM4IxN"
+  }
+]

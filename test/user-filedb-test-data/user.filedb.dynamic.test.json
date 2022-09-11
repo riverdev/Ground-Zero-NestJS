@@ -1,0 +1,12 @@
+[
+  {
+    "loginName": "Test User",
+    "emailAddress": "test@user.com",
+    "roles": [
+      "place-holder-role"
+    ],
+    "passwordHash": "test123",
+    "hashRefreshToken": "place-holder-refresh-token",
+    "id": "RLy0QORRwgRvugI8Q7vm1"
+  }
+]

@@ -1,0 +1,54 @@
+# File name : 3-production-pulreq.yml
+# It is the workflow for a pull request for merging work branch into development branch.
+# It does testing to verify readiness for merge.
+
+name: Pull Request develop  ==> production
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  pulreq-to-staging:
+    name: Pull Request to Production
+    runs-on: ubuntu-latest
+    steps:
+      # ============= Checkout the repo so that this workflow can access it==========
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # ============= Setup Node.js =============================
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      # ============= Cache dependencies =============================
+      - name: Cache dependencies node_modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm #${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-nodecachekey-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-nodecachekey-
+
+      # ============= Install dependencies =============================
+      - run: npm ci # Optionaly add --ignore-scripts flag #installing dependencies
+
+      # ============= Check the Prettiier format compliance =============================
+      - run: npm run format:check
+
+      # ============= Do Unit Tests =============================
+      - run: npm run test -- --coverage
+        env:
+          CI: true
+
+      # ============= Upload the test coverage report =============================
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: coverage
+          # The desired behavior if no files are found in the path
+          if-no-files-found: error # Other options are 'warn' or 'ignore', defaults to `warn`
+          # Duration days after which artifact will expire.
+          retention-days: 5 # max 90 days, 0 value means using github's default value
+

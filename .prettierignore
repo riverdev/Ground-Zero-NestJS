@@ -1,0 +1,11 @@
+# Ignore tests
+test
+
+# ignore all build an framework folders
+dist
+.github
+.vscode
+node_modules
+
+*.txt
+user.filedb.json
