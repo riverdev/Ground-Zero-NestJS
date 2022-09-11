@@ -4,7 +4,7 @@
 
 module.exports = {
   branches: ['main'],
-  repositoryUrl: 'https://github.com/riverdev/gcrun-pipe',
+  repositoryUrl: 'https://github.com/riverdev/Ground-Zero-NestJS',
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
