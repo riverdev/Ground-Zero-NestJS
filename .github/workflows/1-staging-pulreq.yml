@@ -1,11 +1,11 @@
 # File name : 1-staging-pulreq.yml
-# It is the workflow for a pull request for merging work branch into development branch.
+# It is the workflow for a pull request for merging work branch into 'stage' branch.
 # It does testing to verify readiness for merge.
 
-name: Pull Request work ==> develop
+name: Pull Request work ==> stage
 on:
   pull_request:
-    branches: [develop]
+    branches: [stage]
 
 jobs:
   pulreq-to-staging:
