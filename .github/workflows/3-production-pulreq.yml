@@ -2,7 +2,7 @@
 # It is the workflow for a pull request for merging work branch into development branch.
 # It does testing to verify readiness for merge.
 
-name: Pull Request develop  ==> production
+name: Pull Request staging  ==> production (main branch)
 on:
   pull_request:
     branches: [main]
