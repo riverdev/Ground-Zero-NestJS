@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateUserFiledbDto } from './dtos/create-userfildb.dto';
-import { FilterUserFiledbDto } from './dtos/filter-userfiledb.dto';
-import { UpdateUserFiledbDto } from './dtos/update-userfiledb.dto';
-import { UserFiledb } from './entities/userFiledb.object';
-import { UserFiledbService } from './userfiledb.service';
+import { CreateUserFiledbDto } from '../dtos/create-userfildb.dto';
+import { FilterUserFiledbDto } from '../dtos/filter-userfiledb.dto';
+import { UpdateUserFiledbDto } from '../dtos/update-userfiledb.dto';
+import { UserFiledb } from '../entities/userFiledb.object';
+import { UserFiledbService } from '../userfiledb.service';
 
 describe('=== FiledbService Testing ===', () => {
   //Setup-1: Global setting for services
@@ -17,7 +17,8 @@ describe('=== FiledbService Testing ===', () => {
     hashRefreshToken: 'place-holder-refresh-token',
   };
 
-  const FILEDB_PATH: string = './test/user-filedb-test-data/';
+  //const FILEDB_PATH: string = './test/user-filedb-test-data/';
+  const FILEDB_PATH: string = './src/modules/user-filedb/tests/';
 
   //   The dynamic file is created automatically by the unit test
   // it is used by it to create, delete , updated ...). This file is not

@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserFiledbController as UserFiledbController } from './userfiledb.controller';
-import { UserFiledbService } from './userfiledb.service';
+import { UserFiledbController as UserFiledbController } from '../userfiledb.controller';
+import { UserFiledbService } from '../userfiledb.service';
 
 describe('UserFiledbController', () => {
   let controller: UserFiledbController;
