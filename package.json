@@ -22,7 +22,8 @@
     "format:check": "prettier --check \"**/*.{ts,js,jsx,yml,yaml,json,css,scss,mdl}\"",
     "format": "prettier --write \"**/*.{ts,js,jsx,yml,yaml,json,css,scss,mdl}\"",
     "format-original": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "commit": "cz"
+    "prep": "npm run test && npm run test:e2e && npm run format && npm run format:check",
+    "commit": "git add . && cz"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.11",
