@@ -16,8 +16,11 @@ export class AppService {
     console.log({ myEnvVarName });
 
     return `<h1> Ground-Zero-NestJS Open Source Project     </h1>
-            <p> Last updated: 2022-09-12-1110 branch [work] </p>
+            <p> Last updated: 2022-09-12-1150 branch [work] </p>
             <br> </br>
+            <p align="center">
+  <img src="./media/gif-gz-nestjs-logo.gif" width="200" alt="Nest Logo" /> </a>
+</p>
             <a href="https://github.com/riverdev/Ground-Zero-NestJS">Link to GitHub repo</a>
             <br> </br>
             <h3> Routes for branch 'unit-base': </h3>
