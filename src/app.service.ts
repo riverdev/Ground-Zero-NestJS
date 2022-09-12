@@ -22,7 +22,7 @@ export class AppService {
     //todo  https://stackoverflow.com/questions/37486885/displaying-local-images-in-static-html-served-by-nodejs
     //todo
     return `<h1> Ground-Zero-NestJS Open Source Project     </h1>
-            <p> Last updated: 2022-09-12-1150 </p>
+            <p> Last updated: 2022-09-12-1435 </p>
             <br> </br>
             <p align="left">
             
