@@ -1,7 +1,7 @@
 # Ground Zero NestJS Open Source Project
 
 <p align="center">
-  <img src="./media/gif-gz-nestjs-logo.gif" width="200" alt="Nest Logo" /> </a>
+  <img src="./media/gif-gz-nestjs-logo.gif" width="200" alt="GZ-Nest Logo">
 </p>
 
 
