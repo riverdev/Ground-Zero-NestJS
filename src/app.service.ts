@@ -15,9 +15,18 @@ export class AppService {
 
     console.log({ myEnvVarName });
 
+    //todo  Tried to add an image to the HTML code below with a url of an image stored localy in code folder,
+    //todo     but it did not display, the code I used was :
+    //todo  <img src="./media/icon-ground-zero-nestjs.png" width="200" alt="GZ-Nest Logo">
+    //todo     a link that might help to research this is:
+    //todo  https://stackoverflow.com/questions/37486885/displaying-local-images-in-static-html-served-by-nodejs
+    //todo
     return `<h1> Ground-Zero-NestJS Open Source Project     </h1>
-            <p> Last updated: 2022-09-11-1927 branch [work] </p>
+            <p> Last updated: 2022-09-12-1150 </p>
             <br> </br>
+            <p align="left">
+            
+            </p>
             <a href="https://github.com/riverdev/Ground-Zero-NestJS">Link to GitHub repo</a>
             <br> </br>
             <h3> Routes for branch 'unit-base': </h3>
