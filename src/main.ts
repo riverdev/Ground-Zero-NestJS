@@ -22,10 +22,10 @@ async function bootstrap() {
   // setupApp(app);
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('GroundZero example')
-    .setDescription('The GroundZero API description')
+    .setTitle('Ground Zero NestJs example')
+    .setDescription('The Ground Zero NestJS API description')
     .setVersion('1.0')
-    .addTag('GroundZero')
+    .addTag('GZ-Nest')
     .addBasicAuth()
     // .addSecurity('basic', {
     //   type: 'http',

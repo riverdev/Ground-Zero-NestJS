@@ -15,6 +15,7 @@ import LogsMiddleware from './common/middlewares/logs.middleware';
 import { NotesModule } from './modules/notes/notes.module';
 import { UserFiledbModule } from './modules/user-filedb/userfiledb.module';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
+import { AuthModule } from './auth/auth.module';
 import { UserFiledbService } from './modules/user-filedb/userfiledb.service';
 
 //const envVarFolderPath = '/common/envs'; //'/config/envs';
@@ -28,6 +29,8 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
 @Module({
   imports: [
     NotesModule,
+
+    AuthModule,
 
     ConfigModule.forRoot({
       envFilePath: pathForEnvFile,
