@@ -8,12 +8,12 @@
 <p>
 
 ### About Ground Zero NestJS :
-- "Ground Zero NestJS", aka *GZ-Nest*, is an Open Source project that enables developers to quickly start a new NestJS project and then, as the project grows, easily plug&play new feature-units into it.
+- "Ground Zero NestJS", aka *GZ-Nest*, is an Open Source project that enables developers to quickly start a new NestJS project and then, as the project grows, easily plug-&-play new features into it.
 
 ### How it works in general :
 - In general *GZ-Nest* for backend projects is analogous to what a PC-building-kit is for a PC building project.
 
-- Just as a udes a PC-building-kit has a  motherboard and different plug-&-play components to easily connect/disconnect features from it, so does *GZ-Nest* which has a code component as a "mother-board" and different independent plug-&-play code-components for backend features.
+- Just as a PC-building-kit has a motherboard and different plug-&-play components such as graphics , sounds into it, so does *GZ-Nest* which has a base code component as a "mother-board" and different independent code-components (for auth, db, ...) that plug-&-play into the base code.
 
 ### How it works in practice :
 - In practice *GZ-Nest* consists of "code-units", where one of the code units is the "motherboard" (in the analogy), this unit is named "unit-base".
