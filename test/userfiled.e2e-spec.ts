@@ -5,7 +5,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { CreateUserFiledbDto } from '../src/modules/user-filedb/dtos/create-userfildb.dto';
-import { jsonPrettify } from '../src/common/helpers/global.helper';
+//import { jsonPrettify } from '../src/common/helpers/global.helper';
 import { UserFiledb } from '../src/modules/user-filedb/entities/userFiledb.object';
 //import { User } from '../src/user-filedb/entities/user.object';
 //import { setupApp } from './../src/setup-app';

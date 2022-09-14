@@ -16,6 +16,8 @@ import { NotesModule } from './modules/notes/notes.module';
 import { UserFiledbModule } from './modules/user-filedb/userfiledb.module';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
 import { UserFiledbService } from './modules/user-filedb/userfiledb.service';
+import { PreauthMiddleware } from './auth-firebase/preauth.middleware';
+import { RequestMethod } from '@nestjs/common';
 
 //const envVarFolderPath = '/common/envs'; //'/config/envs';
 //const pathForEnvFile: string = getEnvPath(__dirname+envVarFolderPath);
@@ -77,6 +79,11 @@ export class AppModule {
   // In this case we are defining the LogsMiddleware
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LogsMiddleware).forRoutes('*'); //Apply to all the routes in the app
+
+    consumer.apply(PreauthMiddleware).forRoutes({
+      path: '*',
+      method: RequestMethod.ALL,
+    });
   }
   //==========================================
 }

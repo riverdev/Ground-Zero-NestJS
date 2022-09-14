@@ -3,9 +3,11 @@ import {
   Controller,
   Get,
   Logger,
+  Req,
   //Post,
 } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Request } from 'express';
 import { jsonPrettify } from './common/helpers/global.helper';
 
 @Controller()
@@ -23,6 +25,11 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHomepage();
+  }
+
+  @Get('/firebase-auth')
+  getTest(@Req() request: Request): string {
+    return 'Hello ' + request['user']?.email + '!';
   }
 
   //==========================================
