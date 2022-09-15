@@ -16,6 +16,8 @@ import { NotesModule } from './modules/notes/notes.module';
 import { UserFiledbModule } from './modules/user-filedb/userfiledb.module';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
 import { UserFiledbService } from './modules/user-filedb/userfiledb.service';
+import { AuthFbModule } from './auth-fb/auth-fb.module';
+import { FirebaseService } from './firebase/firebase.service';
 
 //const envVarFolderPath = '/common/envs'; //'/config/envs';
 //const pathForEnvFile: string = getEnvPath(__dirname+envVarFolderPath);
@@ -36,6 +38,8 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
     }),
 
     UserFiledbModule,
+
+    AuthFbModule,
   ],
   controllers: [AppController],
   providers: [
@@ -56,6 +60,8 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
         whitelist: true,
       }),
     },
+
+    FirebaseService,
 
     //end of the validation pipe object
     //==========================================
