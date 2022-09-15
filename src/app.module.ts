@@ -32,6 +32,8 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
     NotesModule,
 
     ConfigModule.forRoot({
+      //the forRoot method of ConfigModule loads the .env key-bvalues
+      //and also the system env vars.
       envFilePath: pathForEnvFile,
       isGlobal: true,
       validationSchema: configValidation,
@@ -46,7 +48,7 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
     AppService,
     UserFiledbService,
 
-    //Adding a global scoped filter, you can add multiple filters here
+    //HttpErrorFilter: Adding a global scoped filter, you can add multiple filters here
     {
       provide: APP_FILTER,
       useClass: HttpErrorFilter,

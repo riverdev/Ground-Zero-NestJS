@@ -7,7 +7,7 @@ import {
   HttpException,
   Logger,
 } from '@nestjs/common';
-import { IncomingMessage } from 'http';
+//import { IncomingMessage } from 'http';
 
 @Catch()
 export class HttpErrorFilter implements ExceptionFilter {
