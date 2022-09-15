@@ -23,7 +23,10 @@ export class AuthFbService {
 
   private readonly logger = new Logger(AuthFbService.name);
 
-  public async login(email: string, password: string): Promise<Omit<UserFb, 'password'>> {
+  public async login(
+    email: string,
+    password: string,
+  ): Promise<Omit<UserFb, 'password'>> {
     try {
       const userCredential = await signInWithEmailAndPassword(
         this.firebaseService.auth,
@@ -49,7 +52,6 @@ export class AuthFbService {
         delete loggedUser.password;
 
         return loggedUser;
-        ;
       }
     } catch (error: unknown) {
       throw new InternalServerErrorException(

@@ -34,11 +34,9 @@ export class FirebaseService {
     this.firestore = getFirestore(this.appFb);
 
     this._createCollections();
-
   } //end of constructor
 
-  private _createCollections(){
+  private _createCollections() {
     this.usersCollection = collection(this.firestore, 'users');
   }
-
-}//end of class FirebaseService
+} //end of class FirebaseService

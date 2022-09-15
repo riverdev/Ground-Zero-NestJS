@@ -41,6 +41,14 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
 
     UserFiledbModule,
 
+    //todo: Learn how to run e2e tests when firebase is associated to AppModule
+    //todo: The run flow seems to pass through AuthFbModule && FirebaseService
+    //todo: causing an error:  "FirebaseError: Firebase: Error (auth/invalid-api-key)""
+    //todo: Mayne there is a way to ingore specific imports & provuders in e2e tests
+    //todo: FYI: For firebase testing there is a specific library/tool.
+    //* In order to run e2e tests need to comment out (otherwise e2e fails):
+    //* imports:    AuthFbModule
+    //* providers: FirebaseService
     AuthFbModule,
   ],
   controllers: [AppController],
@@ -63,6 +71,14 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
       }),
     },
 
+    //todo: Learn how to run e2e tests when firebase is associated to AppModule
+    //todo: The run flow seems to pass through AuthFbModule && FirebaseService
+    //todo: causing an error:  "FirebaseError: Firebase: Error (auth/invalid-api-key)""
+    //todo: Mayne there is a way to ingore specific imports & provuders in e2e tests
+    //todo: FYI: For firebase testing there is a specific library/tool.
+    //* In order to run e2e tests need to comment out (otherwise e2e fails):
+    //* imports:    AuthFbModule
+    //* providers: FirebaseService
     FirebaseService,
 
     //end of the validation pipe object
