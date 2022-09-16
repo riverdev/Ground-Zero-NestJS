@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 
 // Import the functions you need from the SDKs you need
 import * as firebase from 'firebase-admin';
+import { jsonPrettify } from '../common/helpers/global.helper';
 import * as serviceAccount from './firebaseServiceAccount.json';
 
 const firebase_params = {
@@ -24,16 +25,14 @@ export class PreauthMiddleware implements NestMiddleware {
 
   constructor() {
     //The following "if" needed to support the e2e tests.
-    //What it does is make sure that we dont trigger twice the 
-    // "initiializeApp", this happens whe running the "userfiledb.e2e.spec.ts" 
+    //What it does is make sure that we dont trigger twice the
+    // "initiializeApp", this happens whe running the "userfiledb.e2e.spec.ts"
     if (firebase.apps.length === 0) {
-
       this.defaultApp = firebase.initializeApp({
         credential: firebase.credential.cert(firebase_params),
         // databaseURL: 'https://fir-auth-bd895.firebaseio.com',
       });
-
-    }//end of if firebase.apps doesnt exist
+    } //end of if firebase.apps doesnt exist
   }
 
   // use(req: any, res: any, next: (error?: any) => void) {

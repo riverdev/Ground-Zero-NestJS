@@ -178,7 +178,7 @@ export const createFile = async (
  *
  * @return {string}
  */
-export const jsonPrettify = (inputObject): string => {
+export const jsonPrettify: any = (inputObject): string => {
   //logger.debug(`>> Flow >> Starting >> [global.helper-jsonPrettify] `,);
 
   const result = JSON.stringify(inputObject, null, 2);
