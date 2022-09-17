@@ -1,3 +1,5 @@
+// ./src/auth-fb/data-models/config-fb.model.ts
+
 export interface ConfigFb {
   apiKey: string;
   authDomain: string;

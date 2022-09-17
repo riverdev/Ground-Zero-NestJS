@@ -1,3 +1,5 @@
+// firebase.service.ts
+
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ConfigFb } from '../auth-fb/data-models/config-fb.model';
