@@ -16,7 +16,7 @@ import { NotesModule } from './modules/notes/notes.module';
 import { UserFiledbModule } from './modules/user-filedb/userfiledb.module';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
 import { UserFiledbService } from './modules/user-filedb/userfiledb.service';
-import { PreauthMiddleware } from './auth-firebase/preauth.middleware';
+import { PreauthMiddleware } from './auth-fb-admin/preauth.middleware';
 import { RequestMethod } from '@nestjs/common';
 
 //const envVarFolderPath = '/common/envs'; //'/config/envs';
