@@ -1,6 +1,6 @@
-# README file of [lab-auth-frbs] branch in Ground Zero NestJS
+# README file of [lab-auth-frbs-admin] branch in Ground Zero NestJS
 
-Git branch : lab-[auth]-[frbs]
+Git branch : lab-[auth]-[frbs-admin]
 File name  : auth-fb.readme.md
 Last update: 2022-09-20-1645
 Source for this code is a Linkedin-Blog with this link:
@@ -32,8 +32,8 @@ Link to documentation:  app.diagrams.net (drawio):  https://app.diagrams.net/#G1
        Using this library adds the overhead of dealing with authentication & Read/Write rules.
        The npm packages to install this are:  *npm install firebase @types/firebase*
 
-## Overview of Firebase-Admin in [lab-auth-frbs]
-- In this source-code branch named [lab-auth-frbs] we implement the second option Firebase-Admin-SDK.
+## Overview of Firebase-Admin in [lab-auth-frbs-admin]
+- In this source-code branch named [lab-auth-frbs-admin] we implement the second option Firebase-Admin-SDK.
 - We implement only one method named : *admin-sdk-auth-verifyIdToken* in the *preauth.middleware.ts* file.
 
 - In this source-code we expect the client to send requests with a firebase-IdToken in the request Bearer.
@@ -41,12 +41,16 @@ Link to documentation:  app.diagrams.net (drawio):  https://app.diagrams.net/#G1
 - We insert the logic for the IdToken in a middleware (PreauthMiddleware) so that every incoming request will be rejected unless it has an IdToken and that token is valid.
 
 
-# Routes supported in this [lab-dtbs-frbs] branch 
+# Routes supported in this [lab-dtbs-frbs-admin] branch 
 1. */register - Uses firebase/auth to authenticate & add a new user to Firebase's Auth-User internal DB*
 2. */login/ - Uses firebase/auth to login but then also uses firebase/firestore to get the data of the app's User db*
 
 
-## Issues
+# FYI:
+- The service account key named : *auth-fb-firebaseServiceAccount.json* is non-valid on purpose.
+- The fact that it is not valid is not associated with the issue desribed below, that issue happens with a valid SA
+
+# Issues
 1. The e2e tests wont work without some preperation, they give out an error:
     **FirebaseError: Firebase: Error (auth/invalid-api-key).**
 
