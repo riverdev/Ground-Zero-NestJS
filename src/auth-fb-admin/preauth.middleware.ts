@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 // Import the functions you need from the SDKs you need
 import * as firebase from 'firebase-admin';
 import { jsonPrettify } from '../common/helpers/global.helper';
-import * as serviceAccount from './firebaseServiceAccount.json';
+import * as serviceAccount from './auth-fb-firebaseServiceAccount.json';
 
 const firebase_params = {
   type: serviceAccount.type,
