@@ -37,6 +37,18 @@ describe('=== User file based db system ===', () => {
   //todo     and the following tests can start with a clean user db and the above
   //todo     highlighted WARNING will not be relavent, no manual managment of the filedb needed
 
+
+    //! All e2e tests wont work with firebase
+    //todo: Learn how to run e2e tests when firebase is associated to AppModule
+    //todo: The run flow seems to pass through AuthFbModule && FirebaseService
+    //todo: causing an error:  "FirebaseError: Firebase: Error (auth/invalid-api-key)""
+    //todo: Mayne there is a way to ingore specific imports & provuders in e2e tests
+    //todo: FYI: For firebase testing there is a specific library/tool.
+    //* In order to run e2e tests go to the AppModule and comment out (otherwise e2e fails):
+    //* imports:    AuthFbModule
+    //* providers: FirebaseService
+
+
   let app: INestApplication;
  let newlyAddedUser: UserFiledb;
   const createUserDto: CreateUserFiledbDto = {
