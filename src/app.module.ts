@@ -38,8 +38,7 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
 
     UserFiledbModule,
 
-    // NOt working : MongooseModule.forRoot(process.env.MONGODB_URI),
-    //works  MongooseModule.forRoot('mongodb+srv://myuser:myuserpass1@cluster4booksdb.5yycafu.mongodb.net/newdb?retryWrites=true&w=majority'),
+    // MongooseModule.forRoot('xxxmongodb+srv://xxxmyuser:nopassw@cluster4booksdb.5yycafu.mongodb.net/mydb?retryWrites=true&w=majority'),
 
     MongooseModule.forRootAsync({
       imports: [ConfigModule],

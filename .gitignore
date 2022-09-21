@@ -3,7 +3,7 @@
 /node_modules
 
 # Env variables
-/config/envs/
+*.env
 
 # Exclude the sample.env because we want to share it
 !sample.env
