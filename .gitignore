@@ -6,7 +6,7 @@
 *.env
 
 # Exclude the sample.env because we want to share it
-!sample.env
+!shared.env
 
 # Exclude the local user interaction db file
 user.filedb.json 
