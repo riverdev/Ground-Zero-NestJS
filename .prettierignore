@@ -1,5 +1,7 @@
 # Ignore tests
 test
+user.filedb.dynamic.test.json
+user.filedb.static.test.json
 
 # ignore all build an framework folders
 dist

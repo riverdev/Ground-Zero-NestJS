@@ -10,4 +10,6 @@ export const configValidation = Joi.object({
   DB_HOST: Joi.string().required(),
   DB_LOCAL_FILE_PATH: Joi.string().required(),
   DB_LOCAL_FILENAME: Joi.string().required(),
+
+  MONGODB_URI: Joi.string().required(),
 });

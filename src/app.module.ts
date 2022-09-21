@@ -5,7 +5,7 @@ import {
   Module,
   ValidationPipe,
 } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -16,6 +16,7 @@ import { NotesModule } from './modules/notes/notes.module';
 import { UserFiledbModule } from './modules/user-filedb/userfiledb.module';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
 import { UserFiledbService } from './modules/user-filedb/userfiledb.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
 //const envVarFolderPath = '/common/envs'; //'/config/envs';
 //const pathForEnvFile: string = getEnvPath(__dirname+envVarFolderPath);
@@ -36,8 +37,22 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
     }),
 
     UserFiledbModule,
-  ],
-  controllers: [AppController],
+
+    // NOt working : MongooseModule.forRoot(process.env.MONGODB_URI),
+    //works  MongooseModule.forRoot('mongodb+srv://myuser:myuserpass1@cluster4booksdb.5yycafu.mongodb.net/newdb?retryWrites=true&w=majority'),
+
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGODB_URI'),
+        //useNewUrlParser: true
+      }),
+      inject: [ConfigService],
+    }),
+  ], //end imports
+
+  controllers: [AppController], //end controllers
+
   providers: [
     AppService,
     UserFiledbService,
@@ -67,7 +82,7 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
     //    useValue: values that lala needs
     // },
     //==========================================
-  ],
+  ], //end providers
 })
 export class AppModule {
   private readonly logger = new Logger(AppController.name);
