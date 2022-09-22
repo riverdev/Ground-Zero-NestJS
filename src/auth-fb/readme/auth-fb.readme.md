@@ -40,13 +40,3 @@ Link to documentation:  app.diagrams.net (drawio):  https://app.diagrams.net/#G1
 1. */register - Uses firebase/auth to authenticate & add a new user to Firebase's Auth-User internal DB*
 2. */login/ - Uses firebase/auth to login but then also uses firebase/firestore to get the data of the app's User db*
 
-
-## Issues
-1. The e2e tests wont work without some preperation, they give out an error:
-    **FirebaseError: Firebase: Error (auth/invalid-api-key).**
-
-2. In order to run them you need to comment out the wireup to firebase as explained here:
-    Go to the AppModule and comment out :
-       imports  : AuthFbModule
-       providers: FirebaseService
-
