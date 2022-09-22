@@ -23,7 +23,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 //const pathForEnvFile: string = getEnvPath(`${__dirname}/common/envs`);
 const pathForEnvFile: string = getEnvPath(`${__dirname}/config/envs`);
 
-console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
+// console.log(`\n====   pathForEnvFile = "${pathForEnvFile}"  \n ==== __dirname = ${__dirname}`);
 //todo How to add the logger to AppModule ?
 
 @Module({

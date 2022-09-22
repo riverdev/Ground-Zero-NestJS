@@ -3,10 +3,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from '../src/app.module';
+//import { AppModule } from '../src/app.module';
+import { AppController } from '../src/app.controller';
+import { AppService } from '../src/app.service';
 import { CreateUserFiledbDto } from '../src/modules/user-filedb/dtos/create-userfildb.dto';
 import { jsonPrettify } from '../src/common/helpers/global.helper';
 import { UserFiledb } from '../src/modules/user-filedb/entities/userFiledb.object';
+import { UserFiledbService } from '../src/modules/user-filedb/userfiledb.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { getEnvPath } from '../src/common/helpers/env.helper';
+import { configValidation } from '../src/config/scemas/config.schemas';
+import { UserFiledbModule } from '../src/modules/user-filedb/userfiledb.module';
 //import { User } from '../src/user-filedb/entities/user.object';
 //import { setupApp } from './../src/setup-app';
 
@@ -38,6 +45,14 @@ describe('=== User file based db system ===', () => {
 
   let app: INestApplication;
   let newlyAddedUser: UserFiledb;
+
+  const mystr = process.cwd();
+  //const pathOfSrc = mystr.substring(0, mystr.lastIndexOf(""));
+
+  const pathForEnvFile: string = getEnvPath(`${mystr}/src/config/envs`);
+
+  //console.log(`\n====   pathForEnvFile = "${pathForEnvFile}"  \n ==== mystr = ${mystr}`);
+
   const createUserDto: CreateUserFiledbDto = {
     loginName: 'Test',
     roles: ['place-holder-role'],
@@ -48,7 +63,17 @@ describe('=== User file based db system ===', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [
+        ConfigModule.forRoot({
+          envFilePath: pathForEnvFile,
+          isGlobal: true,
+          validationSchema: configValidation,
+        }),
+
+        UserFiledbModule,
+      ],
+      controllers: [AppController],
+      providers: [AppService, ConfigService, UserFiledbService],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -77,11 +102,13 @@ describe('=== User file based db system ===', () => {
         expect(newlyAddedUser.emailAddress).toEqual(createUserDto.emailAddress);
         expect(newlyAddedUser.passwordHash).toEqual(createUserDto.passwordHash);
       });
-  });
+  });//end of adds a new user
 
   //(3) Does a filter search to find the new user.
   it('Can search for and get the new user by filter values', async () => {
-    const filterString = `/user?emailAddress=${newlyAddedUser.emailAddress}&&loginName${newlyAddedUser.loginName}`;
+    const filterString = `/user?emailAddress=${newlyAddedUser.emailAddress}&&loginName=${newlyAddedUser.loginName}`;
+
+         //console.log(`\n ===========   filterString = "${filterString}"`);
 
     return request(app.getHttpServer())
       .get(filterString)
@@ -95,7 +122,7 @@ describe('=== User file based db system ===', () => {
         expect(response.id).toEqual(newlyAddedUser.id);
         expect(response.passwordHash).toEqual(newlyAddedUser.passwordHash);
       });
-  });
+  }); //end of search for the new user
 
   // (4) Updates the new user.
   it('Updates the user that was just added', async () => {
