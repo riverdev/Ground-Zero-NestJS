@@ -18,7 +18,6 @@ import { UserFiledbService } from './userfiledb.service';
 import { FilterUserFiledbDto } from './dtos/filter-userfiledb.dto';
 import { jsonPrettify } from '../../common/helpers/global.helper';
 import { ConfigService } from '@nestjs/config';
-import { AppController } from '../../app.controller';
 
 @Controller('user')
 export class UserFiledbController {
@@ -34,7 +33,7 @@ export class UserFiledbController {
     this.filedbService.dbfileName = this.configService.get('DB_LOCAL_FILENAME');
   }
 
-  private readonly logger = new Logger(AppController.name);
+  private readonly logger = new Logger(UserFiledbController.name);
 
   /**
    * Finds users either by filter or if no filter then get all users

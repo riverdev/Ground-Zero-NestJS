@@ -17,6 +17,7 @@ import { UserFiledbModule } from './modules/user-filedb/userfiledb.module';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
 import { UserFiledbService } from './modules/user-filedb/userfiledb.service';
 import { MongooseModule } from '@nestjs/mongoose';
+import { BooksModule } from './modules/books/books.module';
 
 //const envVarFolderPath = '/common/envs'; //'/config/envs';
 //const pathForEnvFile: string = getEnvPath(__dirname+envVarFolderPath);
@@ -48,6 +49,8 @@ const pathForEnvFile: string = getEnvPath(`${__dirname}/config/envs`);
       }),
       inject: [ConfigService],
     }),
+
+    BooksModule,
   ], //end imports
 
   controllers: [AppController], //end controllers
@@ -84,7 +87,7 @@ const pathForEnvFile: string = getEnvPath(`${__dirname}/config/envs`);
   ], //end providers
 })
 export class AppModule {
-  private readonly logger = new Logger(AppController.name);
+  private readonly logger = new Logger(AppModule.name);
 
   //==========================================
   // This code section is where we add Global middleware

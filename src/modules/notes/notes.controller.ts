@@ -11,6 +11,7 @@ import {
   HttpException,
   HttpStatus,
   Logger,
+  NotFoundException,
   Param,
   Patch,
   Post,
@@ -24,7 +25,7 @@ import {
   ApiOperation,
   ApiTags,
 } from '@nestjs/swagger';
-import { AppController } from '../../app.controller';
+import { string } from 'joi';
 
 import { CreateNoteDto } from './dtos/create-note.dto';
 import { UpdateNoteDto } from './dtos/update-note.dto';
@@ -33,7 +34,7 @@ import { NotesService } from './notes.service';
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
-  private readonly logger = new Logger(AppController.name);
+  private readonly logger = new Logger(NotesController.name);
 
   //  The Notes Home
   @Get()
@@ -58,7 +59,9 @@ export class NotesController {
 
     //Following is throwing a nest-built-in error
     //throw new RequestTimeoutException('Just triggering an error');
-    throw new BadRequestException('Just triggering an error');
+    //throw new BadRequestException('Just triggering an error');
+
+    throw new NotFoundException(`Could not find the thing.`);
 
     // The following is a way to throw any error, not just nest-built-in
     //throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);

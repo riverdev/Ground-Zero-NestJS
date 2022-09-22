@@ -7,7 +7,6 @@ import {
   HttpException,
   Logger,
 } from '@nestjs/common';
-import { IncomingMessage } from 'http';
 
 @Catch()
 export class HttpErrorFilter implements ExceptionFilter {
@@ -15,7 +14,31 @@ export class HttpErrorFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const req = ctx.getRequest();
     const res = ctx.getResponse();
-    const status = exception.getStatus();
+
+    let status: number;
+    let tryCatchStatusMessage: string = '';
+
+    try {
+      status = exception.getStatus();
+    } catch (error) {
+      const errorName = exception.name;
+      switch (errorName) {
+        case 'CastError':
+          status = 404;
+          tryCatchStatusMessage = 'Not Found Error';
+          console.log(
+            'Got a "CastError" which means "400-Not found error" in case of MongoDB',
+          );
+          break;
+        default:
+          status = 505;
+          tryCatchStatusMessage = `Got error with no status code, its\n name is  ${errorName}, it will get error code 505 as place holder.`;
+          console.log(
+            `Got a ${errorName} error we did not program a reaction, so we give it code 505 as default.`,
+          );
+      }
+    }
+
     //const respMessage: string =  JSON.stringify(exception);
 
     //Feature-1: Custom tailored error response
@@ -32,7 +55,9 @@ export class HttpErrorFilter implements ExceptionFilter {
 
     //Feature-2: Custom error logging we log the whole errResponse we created above
     Logger.error(
-      `[${errResponse.code}] Custom error :\n (1) Request was: [${
+      `[${
+        errResponse.code
+      }] Custom error : ${tryCatchStatusMessage} \n (1) Request was: [${
         req.method
       }] on url "${req.url}" \n (2) Response was ${JSON.stringify(
         exception,
