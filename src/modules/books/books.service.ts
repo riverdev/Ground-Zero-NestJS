@@ -35,27 +35,62 @@ export class BooksService {
   }
 
   async findById(id: string) {
-    const bookFound = await this.bookModel.findById(id).exec();
-
-    // if (!bookFound) {
-    //   throw new NotFoundException(`Could not find the book with id = ${id}`);
-    // }
+    const myBook = await this.findABook(id);
 
     const nicelyFormatedSingleBook = {
-      id: bookFound._id,
-      title: bookFound.title,
-      description: bookFound.desc,
-      price: bookFound.price,
+      id: myBook._id,
+      title: myBook.title,
+      description: myBook.desc,
+      price: myBook.price,
     };
 
     return nicelyFormatedSingleBook;
   }
 
-  update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+  async updateBook(
+    id: string,
+    updateBookDto: UpdateBookDto,
+  ): Promise<BookDocument> {
+    //const myBook = await this.findABook(id);
+    const myBook = await this.bookModel.findById(id).exec();
+
+    if (updateBookDto.title) {
+      myBook.title = updateBookDto.title;
+    }
+
+    if (updateBookDto.desc) {
+      myBook.desc = updateBookDto.desc;
+    }
+
+    if (updateBookDto.price) {
+      myBook.price = updateBookDto.price;
+    }
+
+    myBook.save();
+    return myBook;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} book`;
+  async deleteBook(targetId: string) {
+    try {
+      await this.bookModel.deleteOne({ _id: targetId }).exec();
+    } catch (error) {
+      throw new NotFoundException(
+        `Could not find a book to delete with id = ${targetId}`,
+      );
+    }
+
+    return `This action removes a #${targetId} book`;
+  }
+
+  //---------------------Utility private methods
+
+  private async findABook(id: string): Promise<BookDocument> {
+    let bookFound: BookDocument;
+    try {
+      bookFound = await this.bookModel.findById(id).exec();
+    } catch (error) {
+      throw new NotFoundException(`Could not find the book with id = ${id}`);
+    }
+    return bookFound;
   }
 }
