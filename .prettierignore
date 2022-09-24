@@ -1,11 +1,21 @@
 # Ignore tests
 test
+user.filedb.dynamic.test.json
+user.filedb.static.test.json
 
 # ignore all build an framework folders
 dist
-.github
-.vscode
 node_modules
 
+# ignore setup / config files
+.github
+.vscode
+tsconfig*.json
+package*.json
+release*.json
+
+# ignore specific file types
 *.txt
+
+# ignore specific app files
 user.filedb.json

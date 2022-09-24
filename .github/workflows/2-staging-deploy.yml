@@ -9,7 +9,7 @@ on:
 
 env:
   PROJECT_ID: deploy-1-354514
-  SERVICE: gcrun-pipe
+  SERVICE: gznest-stage
   REGION: europe-west2
 
 jobs:

@@ -12,14 +12,14 @@ Last update: 2022-09-09-1530
   for building production grade back-ends.
 
 ## How does it work:
-- GZ (Ground-Zero) is made up of a base common source-code and multiple different 
+- GZ-Nest (Ground Zero NestJS) is made up of a base common source-code and multiple different 
   source codes that are all independent of one another and only dependent on the base source code.
   
 - Each source code is called a "unit". So the base source code is named "unit-base" and one of the multiple others may be amed for example "unit-prisma-postgress" or "unit-auth-jwt".
 
 - This organization of units that are independent of one another but have a shared base enables developers to merge multiple units into a production ready system.
 
-# How to use Ground-Zero NestJS
+# How to use GZ-Nest
 - There are 3 different types of use cases to work with GroundZero NestJS:
   1. To build a new system.
   2. To add a new unit.
@@ -66,6 +66,20 @@ Last update: 2022-09-09-1530
     6. Update and run unit-tests & e2e-tests.
     7. Push for approval.
     8. Once the upgraded unit is approved it will be published the Open Source project. 
+
+
+## Secret files - how to manage .env files
+- GZ-Nest is coded for production ready implementations, this includes solutions for managing multiple 
+  environments such as development, production & testing.
+
+- In the ./src/config/env folder you will find *.env files for each environment.
+
+- All these files are tagged as to be ignored by Git (via the .gitignore file) except for the shared.env file.
+
+- The shared.env file is used as a reference to the key-value syntax & format.
+
+- To create your own dev, prod & test .env files copy the *shared.env* file and substitute your values for the 
+  place-holder values. 
 
 
 # Features included in unit-base
