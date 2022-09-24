@@ -2,11 +2,11 @@
 /dist
 /node_modules
 
-# Env variables
-/config/envs/
+# Exclude the Environment vars from the Git repo, they have secret-keys
+*.env
 
-# Exclude the sample.env because we want to share it
-!sample.env
+# But do not exclude the shared.env because we want to share it to show example key-vars
+!shared.env
 
 # Exclude the local user interaction db file
 user.filedb.json 
