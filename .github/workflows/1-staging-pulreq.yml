@@ -37,7 +37,8 @@ jobs:
       - run: npm run format:check
 
       # ============= Do Unit Tests =============================
-      - run: npm run test -- --coverage
+      #- run: npm run test -- --coverage
+      - run: npm run jest --coverage
         env:
           CI: true
 
@@ -48,7 +49,7 @@ jobs:
           name: code-coverage
           path: coverage
           # The desired behavior if no files are found in the path
-          if-no-files-found: error # Other options are 'warn' or 'ignore', defaults to `warn`
+          if-no-files-found: warn # Other options are 'warn' or 'ignore', defaults to `warn`
           # Duration days after which artifact will expire.
           retention-days: 5 # max 90 days, 0 value means using github's default value
 

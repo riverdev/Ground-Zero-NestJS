@@ -13,7 +13,6 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "export NODE_ENV=prod || set NODE_ENV=prod& node dist/main",
     "set:test": "export NODE_ENV=test || set NODE_ENV=test&",
-    "set:jest": "jest --workers=1 --maxWorkers=1",
     "test:unit": "jest --workers=1 --maxWorkers=1",
     "test": "npm run set:test && npm run test:unit",
     "test:notes-controller": "npm run test notes.controller.spec.ts",
