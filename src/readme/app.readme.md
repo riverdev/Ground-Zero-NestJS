@@ -84,12 +84,12 @@ Last update: 2022-09-09-1530
 
 # Features included in unit-base
 
-- The features included in this branch come from other branches,
-    1. A CI/CD pipeline, (docker & github actions) - branch source is : [work](this branch)
-    2. A simple user file-system db module              [work-8-fsdb]
-    3. Swagger support for OpenAPI documentation        [work-6-swgr]
-    4. ConfigModule and environement var managment      [work-6-cnfg]
-    5. NestJs logger support                            [work-6-logr]
+- The features included in this [unit-base] branch are:
+    1. A CI/CD pipeline, see Dockerfile & .github/workflows yml files and also the release.config.js.
+    2. A simple user file-system db module, see ./src/modules/user-filedb
+    3. ConfigModule and environement var managment , see .src/config folder
+    4. Swagger support for OpenAPI documentation   
+    5. NestJs logger support 
 
 
 ## How to use Swagger OpenAPI feature
