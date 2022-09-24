@@ -8,10 +8,13 @@ import getLogLevels from './common/helpers/logger.helper';
 
 async function bootstrap() {
   console.log(`NODE_ENV="${process.env.NODE_ENV}"`);
+
   const app = await NestFactory.create(AppModule, {
     //If this is a 'prod' run then we set to production logger levels
     logger: getLogLevels(process.env.NODE_ENV === 'prod'),
   });
+
+  app.enableCors(); //@[unit-load-local] Needed in the upload feature for interaction with local-environment frontend application
 
   //* If you want to use the setup solution based on setupApp(app)
   //* then uncomment the call below to setupApp(app) and its import above.

@@ -16,6 +16,7 @@ import { NotesModule } from './modules/notes/notes.module';
 import { UserFiledbModule } from './modules/user-filedb/userfiledb.module';
 import { HttpErrorFilter } from './common/filters/http-error.filter';
 import { UserFiledbService } from './modules/user-filedb/userfiledb.service';
+import { PhotosModule } from './modules/photos/photos.module';
 
 //const envVarFolderPath = '/common/envs'; //'/config/envs';
 //const pathForEnvFile: string = getEnvPath(__dirname+envVarFolderPath);
@@ -36,6 +37,7 @@ console.log(`====   pathForEnvFile = "${pathForEnvFile}"`);
     }),
 
     UserFiledbModule,
+    PhotosModule,
   ],
   controllers: [AppController],
   providers: [
