@@ -4,10 +4,10 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 
 // setting config values
-//todo: Get these values from ConfigModule
+//todo: Get these values from ConfigModule not hardcoded
 const limitSize: number = 4 * 1000000; // converting from Mb to bytes
 const regexFileExtensionFilter = /\/(jpg|jpeg|png|gif|bmp)$/;
-const storagePath = './uploads/photos';
+export const STORAGE_PATH = './uploads/photos';
 
 //todo: Find a way to add validation if file type & content are coherent '.addFileTypeValidator({'
 
@@ -39,7 +39,7 @@ export const multerOptions = {
 
   // Storage options
   storage: diskStorage({
-    destination: storagePath,
+    destination: STORAGE_PATH,
     filename: (req, file, cb) => {
       const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1e5);
 
