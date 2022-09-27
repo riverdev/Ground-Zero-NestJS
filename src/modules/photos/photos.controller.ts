@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Controller,
   Get,
+  NotFoundException,
   Param,
   Post,
   Res,
@@ -47,8 +48,11 @@ export class PhotosController {
   }
 
   @Get(':imgpath')
-  //todo :  Need to catch the error when the file is not found and send a Not Found exception. Currently a movk-505 error is sent because the error code is not accessable/exists.
-  seeUploadedFile(@Param('imgpath') image: string, @Res() res) {
+  //todo :  I could not find a way to catch the error in case of file not found.
+  //todo I wanted to do a customized error using throw new NotFoundException.
+  //todo: The error is caught before my try-catch and gives its own code.
+  //todo My HttpErrorFilter updates the error message by assigning a mock-error status
+  async seeUploadedFile(@Param('imgpath') image: string, @Res() res) {
     return res.sendFile(image, { root: 'uploads/photos' });
   }
 }

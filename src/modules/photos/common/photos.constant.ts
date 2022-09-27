@@ -9,8 +9,6 @@ const limitSize: number = 4 * 1000000; // converting from Mb to bytes
 const regexFileExtensionFilter = /\/(jpg|jpeg|png|gif|bmp)$/;
 export const STORAGE_PATH = './uploads/photos';
 
-//todo: Find a way to add validation if file type & content are coherent '.addFileTypeValidator({'
-
 export const multerOptions = {
   // Enable file size limits
   limits: {
@@ -42,11 +40,7 @@ export const multerOptions = {
     destination: STORAGE_PATH,
     filename: (req, file, cb) => {
       const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1e5);
-
-      //const ext = parse(file.originalname).ext;
-      //const name: string = parse(file.originalname).name;
       const fullFilename = `${uniquePrefix}-${file.originalname}`;
-
       cb(null, fullFilename);
     },
   }), //end storage prop
