@@ -3,9 +3,12 @@
 import {
   BadRequestException,
   Controller,
+  Delete,
   HttpCode,
   HttpException,
+  Param,
   Post,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -47,4 +50,13 @@ export class StorageController {
   } // end of upload
 
   //===========================================================
+
+  @HttpCode(204)
+  @Delete('/:filepath')
+  async delteMedia(@Param('filepath') filepath: string) {
+    //const pathMedia:string = filepath;
+    await this.storageService.delete(
+      this.configService.get('STORAGE_UPLOAD_FOLDER_1') + filepath,
+    );
+  }
 } // end StorageController
