@@ -1,16 +1,21 @@
+//storage.controller.ts
+
 import {
   BadRequestException,
-  Body,
   Controller,
+  HttpCode,
+  HttpException,
   Post,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { StorageService } from './storage.service';
-import { multerOptions, multerOptions2 } from './common/storage.constant';
-import { jsonPrettify } from '../common/helpers/global.helper';
+import { multerOptions } from './common/storage.constant';
 import { ConfigService } from '@nestjs/config';
+import { NotFoundError } from 'rxjs';
+
+//===========================================================
 
 @Controller('storage')
 export class StorageController {
@@ -22,10 +27,9 @@ export class StorageController {
   //===========================================================
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file', multerOptions2))
+  @UseInterceptors(FileInterceptor('file', multerOptions))
   async uploadFileToGcpStorage(
     @UploadedFile() file: Express.Multer.File,
-    //@Body("mediaId") mediaId: string
   ): Promise<{ imagePath: string }> {
     const uniqueFileName = this.storageService.getUniqueFileName(
       file.originalname,
@@ -43,4 +47,4 @@ export class StorageController {
   } // end of upload
 
   //===========================================================
-}
+} // end StorageController

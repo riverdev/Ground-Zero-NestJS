@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { StorageController } from './storage.controller';
 import { StorageService } from './storage.service';
@@ -8,7 +9,7 @@ describe('StorageController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [StorageController],
-      providers: [StorageService],
+      providers: [StorageService, ConfigService],
     }).compile();
 
     controller = module.get<StorageController>(StorageController);

@@ -1,6 +1,7 @@
-// import { StorageFile } from './entities/storage-file.object';
-import { DownloadResponse, Storage } from '@google-cloud/storage';
-import { Injectable } from '@nestjs/common';
+//storage.service.ts
+
+import { Storage } from '@google-cloud/storage';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -40,11 +41,17 @@ export class StorageService {
 
     const stream = file.createWriteStream();
 
-    stream.on('finish', async () => {
-      return await file.setMetadata({
-        metadata: object,
+    stream
+      .on('error', () => {
+        throw new BadRequestException(
+          `Unable to upload image, something went wrong`,
+        );
+      })
+      .on('finish', async () => {
+        return await file.setMetadata({
+          metadata: object,
+        });
       });
-    });
     stream.end(media);
   } //save by path,content-type,media,metadata
 
@@ -58,4 +65,4 @@ export class StorageService {
 
     return uniqueFileName;
   }
-}
+} //StorageService
