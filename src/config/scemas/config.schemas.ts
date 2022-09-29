@@ -18,4 +18,6 @@ export const configValidation = Joi.object({
   STORAGE_CLIENT_EMAIL: Joi.string().required(),
 
   STORAGE_PRIVATE_KEY: Joi.string().required(),
+
+  STORAGE_UPLOAD_FOLDER_1: Joi.string().required(),
 });

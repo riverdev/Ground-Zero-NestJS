@@ -16,6 +16,7 @@ export const multerOptions2 = {
     files: maxNumberOfFiles,
     fileSize: limitFileSizeBytes,
   },
+
   // Check the mimetypes to allow for upload
   fileFilter: (req: any, file: any, cb: any) => {
     if (

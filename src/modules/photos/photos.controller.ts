@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { jsonPrettify } from '../../common/helpers/global.helper';
-import { multerOptions } from './common/photos.constant';
+import { multerOptions } from '../../storage/common/storage.constant';
 import { PhotosService } from './photos.service';
 //import { multerOptions } from './common/photos.constant';
 

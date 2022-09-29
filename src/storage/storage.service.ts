@@ -47,4 +47,15 @@ export class StorageService {
     });
     stream.end(media);
   } //save by path,content-type,media,metadata
+
+  //=======================================
+  //===   H E L P E R    M E T H O D S
+  //=======================================
+
+  getUniqueFileName(originalName: string): string {
+    const uniqueID = Date.now() + '-' + Math.round(Math.random() * 1e5);
+    const uniqueFileName = uniqueID + '-' + originalName;
+
+    return uniqueFileName;
+  }
 }

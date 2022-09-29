@@ -20,6 +20,9 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Uploaded files by app features
+uploads
+
 # OS
 .DS_Store
 
