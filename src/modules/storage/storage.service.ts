@@ -1,8 +1,9 @@
 //storage.service.ts
 
-import { Storage } from '@google-cloud/storage';
+import { DownloadResponse, Storage } from '@google-cloud/storage';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { StorageFile } from './entities/storage-file.object';
 
 @Injectable()
 export class StorageService {
@@ -74,9 +75,24 @@ export class StorageService {
     //todo-bug-(1):
     //todo (1) After calling this function the delete works but there is no response. The Http response never happens and the APi client is stuck waiting   for the "done" response.
     //todo (1) From initial research it may have to do with the "Post controller interceptor logic" the resource for this is: https://docs.nestjs.com/techniques/streaming-files
-
-    //return 'done';
   } //delete by path
+
+  /**
+   * getImage (by path input)
+   * @param path
+   * @returns
+   */
+  async getImage(path: string): Promise<StorageFile> {
+    const fileResponse: DownloadResponse = await this.storage
+      .bucket(this.bucket)
+      .file(path)
+      .download();
+    const [buffer] = fileResponse;
+    const storageFile = new StorageFile();
+    storageFile.buffer = buffer;
+    storageFile.metadata = new Map<string, string>();
+    return storageFile;
+  } //getImage by path
 
   //=======================================
   //===   H E L P E R    M E T H O D S

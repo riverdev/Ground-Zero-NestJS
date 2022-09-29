@@ -4,19 +4,23 @@ import {
   BadRequestException,
   Controller,
   Delete,
+  Get,
   HttpCode,
   HttpException,
+  NotFoundException,
   Param,
   Post,
   Res,
+  ServiceUnavailableException,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { StorageService } from './storage.service';
 import { multerOptions } from './common/storage.constant';
 import { ConfigService } from '@nestjs/config';
-import { NotFoundError } from 'rxjs';
+import { StorageFile } from './entities/storage-file.object';
 
 //===========================================================
 
@@ -52,11 +56,41 @@ export class StorageController {
   //===========================================================
 
   @HttpCode(204)
-  @Delete('/:filepath')
-  async delteMedia(@Param('filepath') filepath: string) {
+  @Delete('/:filename')
+  async delteMedia(@Param('filename') fileName: string) {
     //const pathMedia:string = filepath;
     await this.storageService.delete(
-      this.configService.get('STORAGE_UPLOAD_FOLDER_1') + filepath,
+      this.configService.get('STORAGE_UPLOAD_FOLDER_1') + fileName,
     );
   }
+
+  //===========================================================
+
+  @Get('/:filename')
+  async downloadFile(
+    @Param('filename') fileName: string,
+    @Res() res: Response,
+  ) {
+    let storageFile: StorageFile;
+    try {
+      storageFile = await this.storageService.getImage(
+        this.configService.get('STORAGE_UPLOAD_FOLDER_1') + fileName,
+      );
+    } catch (e) {
+      if (e.message.toString().includes('No such object')) {
+        throw new NotFoundException(`File named '${fileName}' was not found.`);
+      } else {
+        throw new ServiceUnavailableException(
+          `Internal error when trying to download file '${fileName}'.`,
+        );
+      }
+    }
+
+    //todo-bug: Verify why this res.setHeader gives error: "Content type undefined in header"
+    //res.setHeader("Content-Type", storageFile.contentType);
+    res.setHeader('Cache-Control', 'max-age=60d');
+    res.end(storageFile.buffer);
+  } //end downloadFile
+
+  //===========================================================
 } // end StorageController
