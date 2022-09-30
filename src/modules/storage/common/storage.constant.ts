@@ -29,6 +29,9 @@ export const multerOptions = {
     } else {
       // Reject file
       cb(
+        //todo-glitch When this error is triggered then, in postman, any following request I send will freeze
+        //todo      in the "Sending Request..." state forever (doesnt timeout).
+        //todo     I tested in chrome-browser and the glitch doesnt happen (I only tested the download endpoint).
         new HttpException(
           `Unsupported file type ${extname(file.originalname)}`,
           HttpStatus.BAD_REQUEST,

@@ -1,12 +1,10 @@
 //storage.controller.ts
 
 import {
-  BadRequestException,
   Controller,
   Delete,
   Get,
   HttpCode,
-  HttpException,
   NotFoundException,
   Param,
   Post,
@@ -66,6 +64,7 @@ export class StorageController {
 
   //===========================================================
 
+  @HttpCode(200)
   @Get('/:filename')
   async downloadFile(
     @Param('filename') fileName: string,
