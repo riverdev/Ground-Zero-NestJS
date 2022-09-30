@@ -1,7 +1,10 @@
 #  CHECKLIST file for Ground Zero NestJSof [your-unit-name-here] 
 
+Git Branch : unit-[category]-[myunit] *See src/readme/app.conventions.md for naming a unit*
+File name  : my-unit.checklist.md
 Last update: 2022-09-08-1615
-Branch name: unit-[category]-[myunit] *See src/readme/app.conventions.md for naming a unit*
+Status     : Pending  *Options are Pending or Completed*
+
 
 -----------------------------------------------------------
 

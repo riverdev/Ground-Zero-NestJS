@@ -3,6 +3,8 @@
 Git branch : unit-[catagory]-[myunit]
 File name  : my-unit.integration.md
 Last update: 2022-09-08-1500
+Status     : Pending  *Options are Pending or Completed*
+
 
 ---------------------------------------------------------
 ## About this file:
@@ -13,4 +15,4 @@ Add issues and ideas in the dedicated sections of this file
 
 ## Who uses this file:
 This file is directed for the unit-base maintainer.
-They are tasked with maikng sure that all units integrate into unit-base.
+They are tasked with making sure that all units integrate into unit-base.

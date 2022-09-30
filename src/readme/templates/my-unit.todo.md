@@ -3,6 +3,10 @@
 Git branch : unit-[catagory]-[myunit]
 File name  : my-unit.todo.md
 Last update: 2022-09-08-1500
+Status     : *Options to tag this field:
+     *Option-1 : Pending* 
+     *Option-2 : Completed (no more tasks/issues to add but still need to act on these tasks)*
+
 
 -----------------------------------------------------------
 
@@ -12,13 +16,15 @@ This file is used to manage tasks only related to this specific unit (my-unit)
 ## How to use this file:
 - Add todo items in same format as template example.
 - When item is completed (tagged 'Done') move it to the history section at bottom of file
+- Possible valuse for status are: *Pend, Fixed, Ignore, TBD (decide later)*
 
 *Below are examples*
 
 -----------------------------------------------------------
-## Tasks pending action
+## Issues / Glitches 
 
 - Pend : Search the //todo comments to extract tasks then delete the comments. 
+
 
 --------------------
 ## Tasks completed
