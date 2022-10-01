@@ -1,14 +1,13 @@
+// photos.service.ts
+
 import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { HttpException, HttpStatus } from '@nestjs/common';
 import * as fs from 'fs';
 const FileType = require('file-type');
-import { diskStorage } from 'multer';
-import { extname, join } from 'path';
-//import { jsonPrettify } from '../../common/helpers/global.helper';
+import { join } from 'path';
 
 @Injectable()
 export class PhotosService {

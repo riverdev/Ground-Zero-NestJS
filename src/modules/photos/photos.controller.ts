@@ -1,8 +1,12 @@
+// photos.controller.ts
+
 import {
   BadRequestException,
   Controller,
+  Delete,
   Get,
-  NotFoundException,
+  HttpCode,
+  InternalServerErrorException,
   Param,
   Post,
   Res,
@@ -10,10 +14,8 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { jsonPrettify } from '../../common/helpers/global.helper';
-import { multerOptions } from './common/photos.constant';
+import { MULTER_OPTIONS, STORAGE_PATH } from './common/photos.constant';
 import { PhotosService } from './photos.service';
-//import { multerOptions } from './common/photos.constant';
 
 @Controller('photos')
 export class PhotosController {
@@ -22,16 +24,13 @@ export class PhotosController {
   ) {}
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file', multerOptions))
+  @UseInterceptors(FileInterceptor('file', MULTER_OPTIONS))
   async uploadSinglePhoto(
     @UploadedFile() file: Express.Multer.File,
   ): Promise<{ imagePath: string }> {
-    console.log(
-      `Controller-upload: The uploaded file is = ${jsonPrettify(file)}`,
-    );
+    // console.log(`Controller-upload: The uploaded file is = ${jsonPrettify(file)}`);
 
     // Verify if the file is really the type its supposed to be (as its extension says it is)
-
     const isContentTypeLegit =
       await this.photosService.isLegitContentForExtension(file.path);
 
@@ -48,11 +47,26 @@ export class PhotosController {
   }
 
   @Get(':imgpath')
-  //todo :  I could not find a way to catch the error in case of file not found.
-  //todo I wanted to do a customized error using throw new NotFoundException.
-  //todo: The error is caught before my try-catch and gives its own code.
-  //todo My HttpErrorFilter updates the error message by assigning a mock-error status
-  async seeUploadedFile(@Param('imgpath') image: string, @Res() res) {
-    return res.sendFile(image, { root: 'uploads/photos' });
+  //todo : How to send a custom NotFoundException in case cannot find the file ?
+  //todo : It most probably has to be causght in the MULTER_OPTIONS configuration logic.
+  //todo : In the current state the error is caught before my try-catch and gives a default error, not
+  //todo : a customized error. I catch the default multer error with my My HttpErrorFilter
+  //todo : but has no logic to know the reason is "file-not-found" so it returns a 505 error.
+  async uploadFile(@Param('imgpath') image: string, @Res() res) {
+    return res.sendFile(image, { root: STORAGE_PATH });
   }
+
+  @HttpCode(204)
+  @Delete(':photoPath')
+  async removeImage(@Param('photoPath') photoPath: string) {
+    try {
+      this.photosService.removeFile(STORAGE_PATH + '/' + photoPath);
+    } catch (error) {
+      throw new InternalServerErrorException(
+        `Could not delete file [${
+          STORAGE_PATH + '/' + photoPath
+        }] either doesnt exist or something else went wrong.`,
+      );
+    } //catch
+  } // end route removePhoto
 }

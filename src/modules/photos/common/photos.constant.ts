@@ -1,5 +1,7 @@
+// /common/photos.constants.ts
+
 import { HttpException, HttpStatus } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+//import { ConfigService } from '@nestjs/config';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
@@ -7,9 +9,9 @@ import { extname } from 'path';
 //todo: Get these values from ConfigModule not hardcoded
 const limitSize: number = 4 * 1000000; // converting from Mb to bytes
 const regexFileExtensionFilter = /\/(jpg|jpeg|png|gif|bmp)$/;
-export const STORAGE_PATH = './uploads/photos';
+export const STORAGE_PATH = 'uploads/photos';
 
-export const multerOptions = {
+export const MULTER_OPTIONS = {
   // Enable file size limits
   limits: {
     fileSize: limitSize,
@@ -37,7 +39,7 @@ export const multerOptions = {
 
   // Storage options
   storage: diskStorage({
-    destination: STORAGE_PATH,
+    destination: './' + STORAGE_PATH, //important to prefix with './'
     filename: (req, file, cb) => {
       const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1e5);
       const fullFilename = `${uniquePrefix}-${file.originalname}`;
