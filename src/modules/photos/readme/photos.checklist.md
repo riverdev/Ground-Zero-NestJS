@@ -1,8 +1,8 @@
-#  CHECKLIST file for Ground Zero NestJSof [your-unit-name-here] 
+#  CHECKLIST file for Ground Zero NestJSof [unit-load-local] 
 
-Git Branch : unit-[category]-[myunit] *See src/readme/app.conventions.md for naming a unit*
-File name  : my-unit.checklist.md
-Last update: 2022-09-08-1615
+Git Branch : unit-[load]-[local] *See src/readme/app.conventions.md for naming a unit*
+File name  : photos.checklist.md
+Last update: 2022-10-01-1340
 Status     : Pending  *Options are Pending or Completed*
 
 
@@ -23,12 +23,12 @@ Update the status-tag of each line in the checklist to manage your compliance.
 *| Pend | Is documented with Open API Standard , using unit-base's Swagger |*
 *| Pend | Has more than 60% unit-tests                                     |*
 *| Pend | Has e2e tests for user workflows                                 |*
-*| Pend | Is based on the latest release of 'main' branch                  |*
+| Done | Is based on the latest release of 'main' branch                  |
 *| Pend | Is using the env vars with ConfigModule                          |*
 *| Pend | Is using the Logger for logs                                     |*
 *| Pend | Is not using console logs                                        |*
-*| Pend | Is using the naming and syntax conventions described in the 'app.conventions.md' file  |*
-*| Pend | Has a readme folder with updated files                           |*
+| Done | Is using the naming and syntax conventions described in the 'app.conventions.md' file  |
+| Done | Has a readme folder with updated files                           |
 
 
 -----------------------------------------------------------

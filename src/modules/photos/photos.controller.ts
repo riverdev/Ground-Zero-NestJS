@@ -7,6 +7,7 @@ import {
   Get,
   HttpCode,
   InternalServerErrorException,
+  NotFoundException,
   Param,
   Post,
   Res,
@@ -14,6 +15,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { fileURLToPath } from 'url';
 import { MULTER_OPTIONS, STORAGE_PATH } from './common/photos.constant';
 import { PhotosService } from './photos.service';
 
@@ -52,8 +54,19 @@ export class PhotosController {
   //todo : In the current state the error is caught before my try-catch and gives a default error, not
   //todo : a customized error. I catch the default multer error with my My HttpErrorFilter
   //todo : but has no logic to know the reason is "file-not-found" so it returns a 505 error.
-  async uploadFile(@Param('imgpath') image: string, @Res() res) {
-    return res.sendFile(image, { root: STORAGE_PATH });
+  async uploadFile(@Param('imgpath') imageToDownload: string, @Res() res) {
+    //let fileDownloaded: any ;
+    try {
+      //todo: This try-catch never catches errors, they are intercepted by the 'HttpErrorFilter'
+      //todo: The trigger for the error happens before it gets to this route and before it gets to the error-filter
+      return res.sendFile(imageToDownload, { root: STORAGE_PATH });
+    } catch (error) {
+      throw new NotFoundException(
+        `Could not find a file named ${imageToDownload} on the server.`,
+      );
+    }
+
+    //return fileDownloaded;
   }
 
   @HttpCode(204)
