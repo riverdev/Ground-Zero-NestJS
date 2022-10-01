@@ -6,17 +6,16 @@ import {
   Patch,
   Param,
   Delete,
-  Logger,
+  //Logger,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
-import { Book } from './schemas/book.schema';
 
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
-  private readonly logger = new Logger(BooksController.name);
+  //private readonly logger = new Logger(BooksController.name);
 
   @Post()
   async create(@Body() createBookDto: CreateBookDto): Promise<String> {
