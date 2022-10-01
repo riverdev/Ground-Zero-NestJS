@@ -19,3 +19,6 @@ release*.json
 
 # ignore specific app files
 user.filedb.json
+
+# ignore mark-down files (most/all of the readme)
+*.md

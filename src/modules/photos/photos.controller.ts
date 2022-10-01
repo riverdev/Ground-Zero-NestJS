@@ -15,7 +15,6 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { fileURLToPath } from 'url';
 import { MULTER_OPTIONS, STORAGE_PATH } from './common/photos.constant';
 import { PhotosService } from './photos.service';
 
