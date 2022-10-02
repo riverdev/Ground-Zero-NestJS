@@ -44,7 +44,7 @@ const pathForEnvFile: string = getEnvPath(`${__dirname}/config/envs`);
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
+        uri: configService.get<string>('MONGODB_URI_2'),
         //useNewUrlParser: true
       }),
       inject: [ConfigService],
