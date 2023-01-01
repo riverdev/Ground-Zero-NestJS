@@ -44,7 +44,10 @@ const pathForEnvFile: string = getEnvPath(`${__dirname}/config/envs`);
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI_2'),
+        //todo: Need to use configService env vars, not show the uri key
+        //! Not secure using the value of the secret uri-key here.
+        uri: 'mongodb+srv://atlas-user-1:user123456@cluster0.gvq3e0t.mongodb.net/test',
+        //uri: configService.get<string>('MONGODB_URI'),
         //useNewUrlParser: true
       }),
       inject: [ConfigService],
